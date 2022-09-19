@@ -1,0 +1,21 @@
+.mind-element_base-node {
+  text-align: left;
+  font-family: 微软雅黑;
+  background-color: rgb(255, 255, 255);
+  color: rgb(42, 46, 54);
+  font-size: 24px;
+  border-radius: 7px;
+  border: 2px solid transparent;
+  box-shadow: rgb(0 0 0 / 10%) 0px 2px 4px 0px;
+  padding: 14px 38px;
+  font-style: normal;
+  font-weight: normal;
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  margin: 5px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.lf-node-selected .mind-element_base-node {
+  border: 2px solid #1890ff;
+}
