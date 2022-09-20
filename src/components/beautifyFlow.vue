@@ -8,8 +8,9 @@ import {
   SelectionSelect,
 } from '@logicflow/extension';
 import '@logicflow/core/dist/style/index.css'
+import '@logicflow/extension/lib/style/index.css'
 import BeautifyFlowExtension from './beautifyElement/index'
-
+import Dagre from './beautifyElement/tools/dagre'
 
 export default {
   mounted() {
@@ -17,7 +18,10 @@ export default {
       container: this.$refs.container,
       width: 1200,
       height: 1000,
-      grid: true,
+      grid: {
+        visible: false,
+        size: 10,
+      },
       keyboard: {
         enabled: true
       },
@@ -28,8 +32,20 @@ export default {
         Menu,
         SelectionSelect,
         BeautifyFlowExtension,
+        Dagre,
       ]
     })
+    this.lf.extension.control.addItem({
+      iconClass: "beautify-flow",
+      title: "",
+      text: "一键美化",
+      onClick: (lf, ev) => {
+        lf.extension.dagre && this.lf.extension.dagre.layout({
+          nodesep: 20,
+          ranksep: 20,
+        });
+      }
+    });
     this.lf.render()
   },
   methods: {
@@ -38,7 +54,7 @@ export default {
 </script>
 
 <template>
-  <div class="flow-chart">
+  <div class="beautify-chart">
     <div ref="container" class="container"></div>
   </div>
 </template>

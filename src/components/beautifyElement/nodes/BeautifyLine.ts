@@ -1,15 +1,15 @@
 // const { PolylineEdge, PolylineEdgeModel, h} = window;
 import { PolylineEdge, PolylineEdgeModel, h } from "@logicflow/core";
+import { OutlineTheme } from "@logicflow/core/types/constant/DefaultTheme";
 import { pointFilter } from '../../util';
 
 const DISTANCE = 12;
 const ICON_HEIGHT = 16;
 const ICON_WIDTH = 16;
 const WORD_HEIGHT = 16;
-const NODE_HEIGHT = 200;
+const NODE_HEIGHT = 30;
 class BeautifyLine extends PolylineEdge {
   getText() {
-    // todo: 几种情况的处理：1.一个节点连出多条边 2.一个节点的入口连入多条边 3.线的回连
     const { pointsList, text, id } = this.props.model;
     if (!pointsList || pointsList.length === 0) return null;
     const lastPoint = pointsList[pointsList.length - 1];
@@ -18,7 +18,6 @@ class BeautifyLine extends PolylineEdge {
       x?: number,
       y?: number,
     } = {}
-    // let maxWidth = Math.max(Math.abs(lastPoint.x - lastPrePoint.x), Math.abs(lastPoint.y - lastPrePoint.y));
     let width = Math.abs(lastPoint.x - lastPrePoint.x);
     let height = Math.abs(lastPoint.y - lastPrePoint.y);
     let direction = ''
@@ -56,7 +55,7 @@ class BeautifyLine extends PolylineEdge {
 class BeautifyLineModel extends PolylineEdgeModel {
   initEdgeData(data) {
     super.initEdgeData(data)
-    this.offset=10
+    this.offset=30
   }
   setAttributes () {
     if (this.properties.executeStatus === 'executed') {
@@ -64,6 +63,11 @@ class BeautifyLineModel extends PolylineEdgeModel {
     } else {
       this.setZIndex(0)
     }
+  }
+  getOutlineStyle(): OutlineTheme {
+    const style = super.getOutlineStyle()
+    style.stroke = 'none'
+    return style
   }
   getEdgeStyle() {
     const style = super.getEdgeStyle();

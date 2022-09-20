@@ -1,0 +1,29 @@
+.custom-anchor {
+  stroke: #999;
+  stroke-width: 1;
+  fill: #d9d9d9;
+  cursor: crosshair;
+  rx: 3;
+  ry: 3;
+}
+.custom-anchor:hover {
+  fill: #ff7f0e;
+  stroke: #ff7f0e;
+}
+.node-red-palette {
+  width: 150px;
+  background: #FFF;
+  padding: 10px 0;
+  opacity: 0.9;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.beautify-chart .lf-grid > svg {
+  background-image: url('./images/grid.svg');
+  background-size:50px 50px;
+  background-repeat: repeat;
+}
+.beautify-chart .beautify-flow {
+  background-image: url('./images/beautify.svg');
+  width: 20px;
+  height: 20px;
+}

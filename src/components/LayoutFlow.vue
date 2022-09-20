@@ -25,7 +25,7 @@ const activeName = ref('first')
   margin: 20px auto;
 
 }
-.layout-tabs {
+/* .layout-tabs {
   padding: 0 20px;
-}
+} */
 </style>

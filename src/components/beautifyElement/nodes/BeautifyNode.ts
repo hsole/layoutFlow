@@ -2,18 +2,18 @@ import { RectNode, RectNodeModel, h } from "@logicflow/core"
 import { getTextLengthByCanvas } from "../../util";
 
 
-class RedNodeModel extends RectNodeModel {
+class BeautifyNodeModel extends RectNodeModel {
   /**
    * 初始化
    */
   initNodeData(data) {
     super.initNodeData(data)
-    this.width = 100;
-    this.height = 30;
+    this.width = 120;
+    this.height = 40;
     this.radius = 5;
-    // this.text.editable = false;
     this.text.x = this.x + 10;
-    this.iconPosition = ''; // icon位置，left表示左边，'right'表示右边
+    this.text.y = this.y;
+    this.iconPosition = '';
     this.defaultFill = '#a6bbcf';
   }
   getData () {
@@ -85,7 +85,7 @@ class RedNodeModel extends RectNodeModel {
     return style;
   }
 }
-class RedNode extends RectNode {
+class BeautifyNode extends RectNode {
   getAnchorShape(anchorData) {
     const { x, y, type } = anchorData;
     return h("rect", {
@@ -97,7 +97,17 @@ class RedNode extends RectNode {
     });
   }
   getIcon () {
-    return null;
+    const {
+      width,
+      height,
+    } = this.props.model;
+    return h('image', {
+      width: 30,
+      height: 40,
+      x: - width / 2,
+      y: - height / 2,
+      href: './images/delay.svg'
+    })
   }
   getShape() {
     const {
@@ -132,14 +142,14 @@ class RedNode extends RectNode {
             x: - width / 2,
             y: - height / 2,
             width: 30,
-            height: 30,
+            height: 40,
             fill: '#000',
             fillOpacity: 0.05,
             stroke: 'none',
           }),
           this.getIcon(),
           h('path', {
-            d: `M ${30 - width / 2} ${1 -height / 2 } l 0 28`,
+            d: `M ${30 - width / 2} ${1 -height / 2 } l 0 38`,
             stroke: '#000',
             strokeOpacity: 0.1,
             strokeWidth: 1
@@ -152,7 +162,7 @@ class RedNode extends RectNode {
 
 
 export default {
-  type: 'red-node',
-  model: RedNodeModel,
-  view: RedNode
+  type: 'beautify-node',
+  model: BeautifyNodeModel,
+  view: BeautifyNode
 }

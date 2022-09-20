@@ -1,23 +1,19 @@
 <template>
   <div class="demo-collapse">
-    <el-collapse v-model="activeNames">
-      <el-collapse-item title="基础节点" name="base" >
-        <div
-          class="red-ui-palette-node ui-draggable ui-draggable-handle"
-          @mousedown="startDrag(item)"
-          v-for="(item, index) in baseNodes"
-          :key="index"
-          :style="{ backgroundColor: item.background }"
-        >
-          <div class="red-ui-palette-label">{{item.text}}</div>
-          <div class="red-ui-palette-icon-container">
-            <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${item.icon})`}"></div>
-          </div>
-          <div class="red-ui-palette-port red-ui-palette-port-input"></div>
-          <div class="red-ui-palette-port red-ui-palette-port-output"></div>
-        </div>
-      </el-collapse-item>
-    </el-collapse>
+    <div
+      class="red-ui-palette-node ui-draggable ui-draggable-handle"
+      @mousedown="startDrag(item)"
+      v-for="(item, index) in baseNodes"
+      :key="index"
+      :style="{ backgroundColor: item.background }"
+    >
+      <div class="red-ui-palette-label">{{item.text}}</div>
+      <div class="red-ui-palette-icon-container">
+        <div class="red-ui-palette-icon" :style="{ backgroundImage: `url(${item.icon})`}"></div>
+      </div>
+      <div class="red-ui-palette-port red-ui-palette-port-input"></div>
+      <div class="red-ui-palette-port red-ui-palette-port-output"></div>
+    </div>
   </div>
 </template>
 
@@ -39,31 +35,36 @@ const startDrag = (item: any) => {
   const { lf } = props;
   lf.dnd.startDrag({
     type: item.type,
-    text: item.text
+    text: item.text,
+    properties: {
+      style: {
+        backgroundColor: item.background,
+      }
+    }
   })
 }
 
 const baseNodes = ref([
   {
-    type: 'fetch-node',
+    type: 'beautify-node',
     text: 'fetch',
     background: 'rgb(231, 231, 174)',
-    icon: 'public/images/fetch.svg'
+    icon: 'public/images/delay.svg'
   },
   {
-    type: 'function-node',
+    type: 'beautify-node',
     text: 'function',
     background: 'rgb(253, 208, 162)',
-    icon: 'public/images/function.svg'
+    icon: 'public/images/delay.svg'
   },
   {
-    type: 'switch-node',
+    type: 'beautify-node',
     text: 'switch',
     background: 'rgb(226, 217, 110)',
-    icon: 'public/images/switch.svg'
+    icon: 'public/images/delay.svg'
   },
   {
-    type: 'delay-node',
+    type: 'beautify-node',
     text: 'delay',
     background: 'rgb(230, 224, 248)',
     icon: 'public/images/delay.svg'
@@ -74,10 +75,9 @@ const baseNodes = ref([
 <style scoped>
 .demo-collapse {
   width: 150px;
+  background: #FFF;
 }
-.demo-collapse /deep/ .el-collapse-item__header {
-  text-indent: 20px;
-}
+
 .red-ui-palette-node {
   cursor: move;
   background: #fff;
