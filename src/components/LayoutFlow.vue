@@ -1,6 +1,6 @@
 <template>
   <div class="layout-flow">
-    <el-tabs v-model="activeName" class="layout-tabs" @tab-click="handleClick">
+    <el-tabs v-model="activeName" class="layout-tabs">
       <el-tab-pane label="自动布局(树)" name="first">
         <MindmapFlow v-if="activeName === 'first'"/>
       </el-tab-pane>
@@ -17,10 +17,6 @@ import MindmapFlow from './MindmapFlow.vue'
 import BeautifyFlow from './BeautifyFlow.vue'
 
 const activeName = ref('first')
-
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event)
-}
 
 </script>
 <style scoped>
