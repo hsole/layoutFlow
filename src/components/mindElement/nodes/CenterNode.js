@@ -7,14 +7,21 @@ class CenterNode extends HtmlNode {
   constructor (props) {
     super(props)
     this.isMounted = false
-    this.r = h(VueBaseNode, {
-      onBtnClick: (i) => {
-        this.r.component.props.text = String(Number(this.r.component.props.text) + Number(i))
-      }
-    })
+    this.r = h(this.getVueComponent(), this.getVueProps(props))
     this.app = createApp({
       render: () => this.r
     })
+  }
+  getVueComponent () {
+    return VueBaseNode
+  }
+  getVueProps (props) {
+    return {
+      properties: props.model.getProperties(),
+      isSelected: props.model.isSelected,
+      isEditing: props.model.state === 2,
+      text: props.model.text.value,
+    }
   }
   shouldUpdate() {
     const data = {
@@ -38,10 +45,10 @@ class CenterNode extends HtmlNode {
       rootEl.appendChild(node)
       this.app.mount(node)
     } else {
-      this.r.component.props.properties = this.props.model.getProperties()
-      this.r.component.props.isSelected = this.props.model.isSelected
-      this.r.component.props.isEditing = this.props.model.state === 2
-      this.r.component.props.text = this.props.model.text.value
+      const values = this.getVueProps(this.props)
+      Object.keys(values).forEach((key) => {
+        this.r.component.props[key] = values[key]
+      })
     }
   }
   getText () {
@@ -63,7 +70,7 @@ class CenterNodeModel extends HtmlNodeModel {
     } else {
       const { width, height } = getTextLengthByCanvas(this.text.value, this.fontSize);
       this.width = width + 90
-      this.height = height + 32
+      this.height = height + 28 + 8
     }
   }
 
@@ -73,17 +80,18 @@ class CenterNodeModel extends HtmlNodeModel {
     style.hover.stroke = 'none';
     return style;
   }
-  getDefaultAnchor() {
-    return []
+  getAnchorStyle() {
+    const style = super.getAnchorStyle()
+    style.stroke = 'none'
+    style.fill = 'none'
+    return style
   }
+  // getDefaultAnchor() {
+  //   return []
+  // }
   updateText(value) {
     super.updateText(value)
     this.setAttributes()
-  }
-  getData () {
-    const data = super.getData()
-    data.text.value = this.inputData
-    return data
   }
 }
 

@@ -58,6 +58,6 @@ export const getTextLengthByCanvas = (text, fontSize) => {
   })
   return {
     width: maxWidth,
-    height: rows.length * (fontSize + 2) + fontSize / 4,
+    height: rows.length * (fontSize) * 1.5,
   };
 }

@@ -10,12 +10,22 @@
   padding: 14px 38px;
   font-style: normal;
   font-weight: normal;
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  margin: 5px;
+  width: calc(100% - 2px);
+  height: calc(100% - 4px);
+  margin: 2px;
   box-sizing: border-box;
   text-align: center;
+  line-height: 1.5;
 }
 .lf-node-selected .mind-element_base-node {
   border: 2px solid #1890ff;
+}
+.menu-wrapper {
+  position: absolute;
+}
+.mind-element_sub-node {
+  font-size: 16px;
+  border-radius: 7px;
+  padding: 5px 10px;
+  background-color: rgb(204, 229, 255);
 }
