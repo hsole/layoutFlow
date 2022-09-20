@@ -13,8 +13,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import MindmapFlow from './MindmapFlow.vue'
 import BeautifyFlow from './BeautifyFlow.vue'
+import MindmapFlow from './MindmapFlow.vue'
 
 const activeName = ref('first')
 
