@@ -37,6 +37,19 @@ class ContextPad {
         this.addSubNode()
       }
     })
+    this.lf.keyboard.on('enter', () => {
+      const { nodes } = this.lf.getSelectElements()
+      if (nodes.length > 0) {
+        const { edges } = this.lf.graphModel
+        const edge = edges.find(edge => edge.targetNodeId === nodes[0].id)
+        if (edge) {
+          this._activeData = this.lf.getNodeDataById(edge.sourceNodeId)
+        }
+      }
+      if (this._activeData) {
+        this.addSubNode()
+      }
+    })
   }
   render(lf, container) {
     this.container = container
@@ -174,7 +187,7 @@ class ContextPad {
       edges,
     })
     this.lf.selectElementById(node.id)
-    this.lf.getNodeModelById(node.id).setElementState(2)
+    // this.lf.getNodeModelById(node.id).setElementState(2)
   }
   listenDelete = () => {
     this.hideContextMenu()
