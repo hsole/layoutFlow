@@ -49,25 +49,25 @@ const baseNodes = ref([
     type: 'beautify-node',
     text: 'fetch',
     background: 'rgb(231, 231, 174)',
-    icon: 'public/images/delay.svg'
+    icon: '../images/delay.svg'
   },
   {
     type: 'beautify-node',
     text: 'function',
     background: 'rgb(253, 208, 162)',
-    icon: 'public/images/delay.svg'
+    icon: '../images/delay.svg'
   },
   {
     type: 'beautify-node',
     text: 'switch',
     background: 'rgb(226, 217, 110)',
-    icon: 'public/images/delay.svg'
+    icon: '../images/delay.svg'
   },
   {
     type: 'beautify-node',
     text: 'delay',
     background: 'rgb(230, 224, 248)',
-    icon: 'public/images/delay.svg'
+    icon: '../images/delay.svg'
   }
 ])
 
