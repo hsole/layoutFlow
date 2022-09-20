@@ -1,6 +1,6 @@
 import CenterNode from './nodes/CenterNode';
 import SubNode from './nodes/SubNode';
-import mindmapEdge from './nodes/mindmapEdge';
+import MindmapEdge from './nodes/MindmapEdge';
 import { ContextPad } from './tools/menu'
 import './style.css'
 
@@ -9,7 +9,7 @@ class LayoutFlowExtension {
   constructor ({ lf, LogicFlow }) {
     lf.register(CenterNode)
     lf.register(SubNode)
-    lf.register(mindmapEdge)
+    lf.register(MindmapEdge)
     lf.extension.contextPad = new ContextPad({ lf, LogicFlow })
   }
   render(lf, domOverlay) {
