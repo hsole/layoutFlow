@@ -28,6 +28,15 @@ class ContextPad {
     this.app = createApp({
       render: () => this.menuComponent
     })
+    this.lf.keyboard.on('tab', () => {
+      const { nodes } = this.lf.getSelectElements()
+      if (nodes.length > 0) {
+        this._activeData = nodes[0]
+      }
+      if (this._activeData) {
+        this.addSubNode()
+      }
+    })
   }
   render(lf, container) {
     this.container = container
@@ -104,7 +113,9 @@ class ContextPad {
       "node:delete,blank:click,edge:delete,node:drag,graph:transform",
       this.listenDelete
     )
-    this.menuWrapper.style.display = 'none'
+    if (this.menuWrapper) {
+      this.menuWrapper.style.display = 'none'
+    }
   }
   addSubNode() {
     this.hideContextMenu()
@@ -121,7 +132,6 @@ class ContextPad {
     })
     const graphData = this.lf.getGraphData()
     const { nodes, edges } = layoutGraphData(graphData)
-    console.log(nodes)
     const nodeIdMap =  nodes.reduce((acc, cur) => {
       acc[cur.id] = cur
       return acc
@@ -132,18 +142,18 @@ class ContextPad {
         sourceNodeId,
         targetNodeId
       } = edge
-      const sModel = this.lf.getNodeModelById(sourceNodeId)
+      // const sModel = this.lf.getNodeModelById(sourceNodeId)
       const tModel = this.lf.getNodeModelById(targetNodeId)
       const startPoint = {
-        x: nodeIdMap[sourceNodeId].x + sModel.width / 2,
+        x: nodeIdMap[sourceNodeId].x,
         y: nodeIdMap[sourceNodeId].y
       }
       const sJustPoint = {
-        x: nodeIdMap[targetNodeId].x - tModel.width / 2 - 70,
+        x: nodeIdMap[targetNodeId].x - tModel.width / 2 - 100,
         y: nodeIdMap[targetNodeId].y
       }
       const tJustPoint = {
-        x: nodeIdMap[targetNodeId].x - tModel.width / 2 - 70,
+        x: nodeIdMap[targetNodeId].x - tModel.width / 2 - 100,
         y: nodeIdMap[targetNodeId].y
       }
       const endPoint = {
@@ -163,6 +173,8 @@ class ContextPad {
       nodes,
       edges,
     })
+    this.lf.selectElementById(node.id)
+    this.lf.getNodeModelById(node.id).setElementState(2)
   }
   listenDelete = () => {
     this.hideContextMenu()

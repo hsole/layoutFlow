@@ -19,17 +19,17 @@ export default {
     this.lf = new LogicFlow({
       container: this.$refs.container,
       width: 1200,
-      height: 500,
-      grid: {
-        visible: false,
-        type: 'mesh',
-        size: 10,
-      },
-      // adjustEdge: false,
+      height: 1000,
+      grid: false,
+      edgeTextEdit: false,
+      adjustEdge: false,
+      adjustNodePosition: false,
       hoverOutline: false,
       edgeSelectedOutline: false,
+      stopScrollGraph: true,
+      stopZoomGraph: true,
       keyboard: {
-        enabled: true,
+        enabled: true
       },
       // keyboard: true,
       plugins: [
@@ -54,6 +54,11 @@ export default {
       this.lf.setProperties(this.currentNode.id, {
         style
       })
+    },
+    stopTab (ev) {
+      if (ev.code === 'Tab') {
+        ev.preventDefault()
+      }
     }
   },
   components: {
@@ -63,7 +68,7 @@ export default {
 </script>
 
 <template>
-  <div class="flow-chart">
+  <div class="flow-chart" @keydown="stopTab">
     <div ref="container" class="container"></div>
   </div>
 </template>
