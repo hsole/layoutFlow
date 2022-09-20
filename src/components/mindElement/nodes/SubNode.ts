@@ -3,7 +3,7 @@
  */
 import CenterNode from './CenterNode'
 import SubNodeComponent from './SubNode.vue'
-import { getTextLengthByCanvas } from '../util';
+import { getTextLengthByCanvas } from '../../util';
 
 class SubNode extends CenterNode.view {
   getVueComponent () {

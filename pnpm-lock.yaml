@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antv/hierarchy': ^0.6.8
   '@logicflow/core': ^1.1.27
+  '@logicflow/extension': ^1.1.28
   '@vitejs/plugin-vue': ^3.1.0
   element-plus: ^2.2.17
   typescript: ^4.6.4
@@ -13,6 +14,7 @@ specifiers:
 dependencies:
   '@antv/hierarchy': 0.6.8
   '@logicflow/core': 1.1.27
+  '@logicflow/extension': 1.1.28
   element-plus: 2.2.17_vue@3.2.39
   vue: 3.2.39
 
@@ -79,6 +81,22 @@ packages:
     dependencies:
       '@types/mousetrap': 1.6.9
       mousetrap: 1.6.5
+      preact: 10.11.0
+    dev: false
+
+  /@logicflow/core/1.1.28:
+    resolution: {integrity: sha512-X85e0yU1jvFjbMXcfaFaRmM/ATHCx5JvWXUn65wLALZnqVmYe/OQ6FEMEuBv+sXjMwaluac0L/GWVpce8KGZ8g==}
+    dependencies:
+      '@types/mousetrap': 1.6.9
+      mousetrap: 1.6.5
+      preact: 10.11.0
+    dev: false
+
+  /@logicflow/extension/1.1.28:
+    resolution: {integrity: sha512-duq6dfAgb8I/zv+DOWSj0W39Q2cXAOcgN8KTWPi+VnvX21gk0qtnrWkXeIE85Xpj6pRuFOooV+5wZqzoIDy1wg==}
+    dependencies:
+      '@logicflow/core': 1.1.28
+      ids: 1.0.0
       preact: 10.11.0
     dev: false
 
@@ -539,6 +557,10 @@ packages:
     dependencies:
       function-bind: 1.1.1
     dev: true
+
+  /ids/1.0.0:
+    resolution: {integrity: sha512-Zvtq1xUto4LttpstyOlFum8lKx+i1OmRfg+6A9drFS9iSZsDPMHG4Sof/qwNR4kCU7jBeWFPrY2ocHxiz7cCRw==}
+    dev: false
 
   /is-core-module/2.10.0:
     resolution: {integrity: sha512-Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg==}

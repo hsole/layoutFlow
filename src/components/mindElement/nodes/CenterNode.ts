@@ -1,21 +1,30 @@
 import { HtmlNode, HtmlNodeModel } from "@logicflow/core";
 import { createApp, ref, h } from 'vue';
-import VueBaseNode from './BaseNode.vue';
-import { getTextLengthByCanvas } from '../util';
+import VueBaseNode from './CenterNode.vue';
+import { getTextLengthByCanvas } from '../../util';
 
-class BaseNode extends HtmlNode {
+class CenterNode extends HtmlNode {
+  isMounted: boolean;
+  app: any;
+  r: any;
   constructor (props) {
     super(props)
     this.isMounted = false
-    this.r = h(VueBaseNode, {
-      properties: props.model.getProperties(),
-      text: props.model.text.value,
-      isSelected: props.model.isSelected,
-      isEditing: props.model.state === 2,
-    })
+    this.r = h(this.getVueComponent(), this.getVueProps(props))
     this.app = createApp({
       render: () => this.r
     })
+  }
+  getVueComponent () {
+    return VueBaseNode
+  }
+  getVueProps (props) {
+    return {
+      properties: props.model.getProperties(),
+      isSelected: props.model.isSelected,
+      isEditing: props.model.state === 2,
+      text: props.model.text.value,
+    }
   }
   shouldUpdate() {
     const data = {
@@ -39,10 +48,10 @@ class BaseNode extends HtmlNode {
       rootEl.appendChild(node)
       this.app.mount(node)
     } else {
-      this.r.component.props.properties = this.props.model.getProperties()
-      this.r.component.props.isSelected = this.props.model.isSelected
-      this.r.component.props.isEditing = this.props.model.state === 2
-      this.r.component.props.text = this.props.model.text.value
+      const values = this.getVueProps(this.props)
+      Object.keys(values).forEach((key) => {
+        this.r.component.props[key] = values[key]
+      })
     }
   }
   getText () {
@@ -50,22 +59,22 @@ class BaseNode extends HtmlNode {
   }
 }
 
-class BaseNodeModel extends HtmlNodeModel {
+class CenterNodeModel extends HtmlNodeModel {
   initNodeData (data) {
     super.initNodeData(data)
     this.isEditing = false
+    this.fontSize = 24
+    this.text.editable = false
   }
   setAttributes() {
-    this.fontSize = 24
     if (!this.text.value) {
       this.width = 100;
       this.height = 80;
     } else {
       const { width, height } = getTextLengthByCanvas(this.text.value, this.fontSize);
       this.width = width + 90
-      this.height = height + 32
+      this.height = height + 28 + 8
     }
-    this.text.editable = false;
   }
 
   getOutlineStyle() {
@@ -74,22 +83,23 @@ class BaseNodeModel extends HtmlNodeModel {
     style.hover.stroke = 'none';
     return style;
   }
-  getDefaultAnchor() {
-    return []
+  getAnchorStyle(anchorInfo) {
+    const style = super.getAnchorStyle(anchorInfo)
+    style.stroke = 'none'
+    style.fill = 'none'
+    return style
   }
+  // getDefaultAnchor() {
+  //   return []
+  // }
   updateText(value) {
     super.updateText(value)
     this.setAttributes()
   }
-  getData () {
-    const data = super.getData()
-    data.text.value = this.inputData
-    return data
-  }
 }
 
 export default {
-  type: 'base-node',
-  model: BaseNodeModel,
-  view: BaseNode
+  type: 'center-node',
+  model: CenterNodeModel,
+  view: CenterNode
 }

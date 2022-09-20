@@ -6,11 +6,11 @@ import './style.css'
 
 class LayoutFlowExtension {
   static pluginName = 'LayoutFlowExtension'
-  constructor ({ lf, LogicFlow }) {
+  constructor ({ lf }) {
     lf.register(CenterNode)
     lf.register(SubNode)
     lf.register(MindmapEdge)
-    lf.extension.contextPad = new ContextPad({ lf, LogicFlow })
+    lf.extension.contextPad = new ContextPad({ lf })
   }
   render(lf, domOverlay) {
     lf.extension.contextPad.render(lf, domOverlay)

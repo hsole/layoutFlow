@@ -2,16 +2,19 @@
   <div class="layout-flow">
     <el-tabs v-model="activeName" class="layout-tabs" @tab-click="handleClick">
       <el-tab-pane label="自动布局(树)" name="first">
-        <FlowChart v-if="activeName === 'first'"/>
+        <MindmapFlow v-if="activeName === 'first'"/>
       </el-tab-pane>
-      <el-tab-pane label="一键美化" name="second">Config</el-tab-pane>
+      <el-tab-pane label="一键美化" name="second">
+        <BeautifyFlow v-if="activeName === 'second'"/>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import FlowChart from './FlowChart.vue'
+import MindmapFlow from './MindmapFlow.vue'
+import BeautifyFlow from './BeautifyFlow.vue'
 
 const activeName = ref('first')
 
