@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { ref } from 'vue'
 import LogicFlow from '@logicflow/core'
 import '@logicflow/core/dist/style/index.css'
